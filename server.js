@@ -1,6 +1,9 @@
 import express from "express";
+import dotenv from "dotenv";
+import connectDB from "./db/db.js";
 
 const app = express();
+dotenv.config();
 
 // middleware
 import notFoundMiddleware from "./middleware/not-found.js";
@@ -16,6 +19,16 @@ app.use(errorHandlerMiddleware);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT}`);
-});
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(PORT, () => {
+      console.log(`Mongoose connected!`);
+      console.log(`Server running on port: ${PORT}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
