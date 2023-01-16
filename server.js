@@ -6,7 +6,8 @@ const app = express();
 dotenv.config();
 
 // routers
-import authRouter from "./routes/authRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import jobRoutes from "./routes/jobRoutes.js";
 
 // middleware
 import notFoundMiddleware from "./middleware/not-found.js";
@@ -19,7 +20,8 @@ app.get("/", (req, res) => {
   res.send("Welcome!");
 });
 
-app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/jobs", jobRoutes);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
