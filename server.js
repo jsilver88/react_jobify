@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/db.js";
+import "express-async-errors";
 
 const app = express();
 dotenv.config();
