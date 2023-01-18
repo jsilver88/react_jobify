@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/db.js";
 import "express-async-errors";
+import mongoose from "mongoose";
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,8 @@ import jobRoutes from "./routes/jobRoutes.js";
 // middleware
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
+
+mongoose.set("strictQuery", false);
 
 app.use(express.json());
 
